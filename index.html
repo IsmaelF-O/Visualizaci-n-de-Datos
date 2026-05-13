@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de IA en Jóvenes Universitarios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Encabezado */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Secciones */
+        section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #1e3a8a;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            color: #3b82f6;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Listas */
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Cards para clusters */
+        .clusters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .cluster-card {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cluster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .cluster-card strong {
+            display: block;
+            color: #1e3a8a;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        /* Temas semánticos */
+        .semantic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .semantic-item {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #dbeafe;
+            transition: all 0.3s ease;
+        }
+
+        .semantic-item:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Botón principal */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-visualization {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-visualization:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-visualization:active {
+            transform: translateY(-1px);
+        }
+
+        /* Herramientas */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+
+        .tool-card strong {
+            color: #1e3a8a;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .tool-card p {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Pie de página */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            section h2 {
+                font-size: 1.4em;
+            }
+        }
+
+        /* Animación entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <h1>Uso de la Inteligencia Artificial en Jóvenes Universitarios</h1>
+        <p>Visualización y análisis de datos bibliométricos desde Scopus</p>
+    </header>
+
+    <div class="container">
+        <!-- Introducción -->
+        <section>
+            <h2>Introducción</h2>
+            <p>
+                Este proyecto se enfoca en el <strong>análisis y visualización de datos científicos</strong> obtenidos desde Scopus, 
+                con el objetivo de estudiar cómo los jóvenes universitarios utilizan la Inteligencia Artificial en distintos 
+                contextos sociales, académicos y creativos.
+            </p>
+            <p style="margin-top: 15px;">
+                El análisis fue desarrollado principalmente en <strong>Python</strong>, utilizando estructuras de procesamiento 
+                de texto, clasificación temática y exploración de patrones semánticos dentro de artículos científicos.
+            </p>
+        </section>
+
+        <!-- Análisis Semántico -->
+        <section>
+            <h2>Análisis Semántico y Clasificación Temática</h2>
+            <p>
+                El proyecto implementa <strong>diccionarios temáticos personalizados</strong> para detectar patrones relacionados con:
+            </p>
+            <div class="semantic-grid">
+                <div class="semantic-item">🤖 IA Generativa</div>
+                <div class="semantic-item">🎓 Educación Superior</div>
+                <div class="semantic-item">🎨 Creatividad Digital</div>
+                <div class="semantic-item">👥 Interacción Social</div>
+                <div class="semantic-item">📱 Redes Sociales</div>
+                <div class="semantic-item">🎬 Producción Multimedia</div>
+            </div>
+        </section>
+
+        <!-- Clusters -->
+        <section>
+            <h2>Clasificación de Artículos</h2>
+            <p>Los artículos son clasificados automáticamente en <strong>4 clusters temáticos principales</strong>:</p>
+            <div class="clusters-grid">
+                <div class="cluster-card">
+                    <strong>👥 Social</strong>
+                    <p>Interacción y redes sociales</p>
+                </div>
+                <div class="cluster-card">
+                    <strong>🎓 Académico</strong>
+                    <p>Educación y contexto universitario</p>
+                </div>
+                <div class="cluster-card">
+                    <strong>🎨 Creativo</strong>
+                    <p>Creatividad digital y producción</p>
+                </div>
+                <div class="cluster-card">
+                    <strong>🔀 Mixto/Otros</strong>
+                    <p>Combinaciones y casos especiales</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">
+                Esto permite construir <strong>mapas semánticos</strong> y detectar relaciones entre conceptos 
+                dentro del corpus científico.
+            </p>
+        </section>
+
+        <!-- Herramientas -->
+        <section>
+            <h2>Herramientas y Tecnologías</h2>
+            
+            <h3>📊 Limpieza y Procesamiento de Datos</h3>
+            <div class="tool-card">
+                <strong>Pandas</strong>
+                <p>Carga, limpieza y transformación de archivos CSV desde Scopus. Manejo de tablas de datos y metadatos científicos.</p>
+            </div>
+
+            <h3>🔍 Bibliotecas de Python</h3>
+            <ul>
+                <li><strong>re</strong> - Limpieza mediante expresiones regulares</li>
+                <li><strong>unicodedata</strong> - Normalización de acentos y caracteres especiales</li>
+                <li><strong>collections.Counter</strong> - Conteo de términos y frecuencias</li>
+                <li><strong>math.log</strong> - Cálculo de métricas similares a TF-IDF</li>
+                <li><strong>difflib.SequenceMatcher</strong> - Comparación de similitud entre autores y términos</li>
+            </ul>
+
+            <h3>📈 Visualización de Datos</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <strong>Matplotlib</strong>
+                    <p>Gráficos estadísticos y visualizaciones básicas</p>
+                </div>
+                <div class="tool-card">
+                    <strong>Plotly</strong>
+                    <p>Visualizaciones interactivas y exploración dinámica de datos</p>
+                </div>
+                <div class="tool-card">
+                    <strong>PyVis</strong>
+                    <p>Redes semánticas y grafos interactivos entre conceptos</p>
+                </div>
+                <div class="tool-card">
+                    <strong>NetworkX</strong>
+                    <p>Modelado de redes complejas y relaciones bibliométricas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Qué Hace el Proyecto -->
+        <section>
+            <h2>¿Qué Hace el Proyecto?</h2>
+            <ol>
+                <li>Importa datos científicos desde <strong>Scopus</strong></li>
+                <li>Limpia y normaliza los textos</li>
+                <li>Detecta términos relevantes relacionados con IA</li>
+                <li>Clasifica artículos por clusters temáticos</li>
+                <li>Extrae frecuencias y relaciones semánticas</li>
+                <li>Genera visualizaciones y mapas de interacción conceptual</li>
+                <li>Permite interpretar tendencias sobre el uso de IA en estudiantes universitarios</li>
+            </ol>
+        </section>
+
+        <!-- Visualización de Datos -->
+        <section>
+            <h2>Concepto Clave: Visualización de Datos</h2>
+            <p>
+                La <strong>visualización de datos</strong> es el proceso de transformar información numérica o textual 
+                en representaciones gráficas comprensibles. Su objetivo es revelar patrones, tendencias y relaciones 
+                que serían difíciles de detectar en formato textual o tabular.
+            </p>
+            <h3>En este proyecto, la visualización permite:</h3>
+            <ul>
+                <li>Identificar conexiones entre conceptos</li>
+                <li>Observar cómo se agrupan los artículos</li>
+                <li>Detectar relaciones entre IA, educación y creatividad</li>
+                <li>Construir mapas semánticos interactivos</li>
+                <li>Interpretar dinámicas bibliométricas dentro del corpus científico</li>
+            </ul>
+            <p style="margin-top: 20px;">
+                La visualización actúa como una <strong>"traducción visual"</strong> del conocimiento científico, 
+                facilitando el análisis sociotécnico de la producción académica sobre Inteligencia Artificial.
+            </p>
+        </section>
+
+        <!-- Botón de Visualización -->
+        <section style="text-align: center; background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);">
+            <h2 style="border: none; color: #1e3a8a;">Acceder a la Visualización Interactiva</h2>
+            <p style="margin-bottom: 30px; color: #555;">
+                Explora los clusters y relaciones semánticas en 3D de forma interactiva
+            </p>
+            <div class="btn-container">
+                <a href="visualizacion_clusters_3d.html" class="btn-visualization">
+                    📊 Ver Visualización 3D
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p><strong>Proyecto de Análisis Bibliométrico</strong></p>
+        <p>Uso de la Inteligencia Artificial en Jóvenes Universitarios</p>
+        <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">© 2026 - Análisis de Datos Científicos desde Scopus</p>
+    </footer>
+</body>
+</html>
